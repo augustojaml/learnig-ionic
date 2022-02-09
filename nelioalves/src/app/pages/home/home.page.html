@@ -17,11 +17,15 @@
       <ion-label position="stacked">Email</ion-label>
       <ion-input type="text"></ion-input>
     </ion-item>
-    <ion-item  class="input-group">
+    <ion-item class="input-group">
       <ion-label position="stacked">passowrd</ion-label>
-      <ion-input type="text" ></ion-input>
+      <ion-input type="text"></ion-input>
     </ion-item>
-    <ion-button expand="block" color="primary" >Login</ion-button>
-    <ion-button expand="block" color="primary" fill="outline" >Registrar</ion-button>
+    <ion-button (click)="login()" expand="block" color="primary"
+      >Login</ion-button
+    >
+    <ion-button expand="block" color="primary" fill="outline"
+      >Registrar</ion-button
+    >
   </form>
 </ion-content>
