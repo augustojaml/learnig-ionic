@@ -1,0 +1,24 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>List</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="myList">
+  <ion-list>
+    <ion-item *ngFor="let item of items" button (click)="selected(item.id)">
+      <ion-icon
+        ios="{{item.icon}}-outline"
+        md="{{item.icon}}-sharp"
+        size="large"
+        slot="start"
+        color="#000"
+      ></ion-icon>
+      <ion-label> {{ item.title}} </ion-label>
+      <ion-label slot="end"><strong> {{ item.note }} </strong></ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
