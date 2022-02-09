@@ -1,3 +1,4 @@
+import { CategoriesService } from '../../../services/domain/categories.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +7,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./categories.page.scss'],
 })
 export class CategoriesPage implements OnInit {
-
-  constructor() { }
+  constructor(private categoriesService: CategoriesService) {}
 
   ngOnInit() {
+    this.categoriesService.findAll().subscribe(
+      (response) => {
+        console.log(response);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
-
 }
