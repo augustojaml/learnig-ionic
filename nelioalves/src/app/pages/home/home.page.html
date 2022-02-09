@@ -1,23 +1,27 @@
-<ion-header [translucent]="true">
+<!-- <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>Home</ion-title>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
 
-<ion-content class="my-content">
+<ion-content class="home-page">
   <ion-text>
-    <h1>Ionic Menu Starter</h1>
+    <h1>Sistema de Pedidos</h1>
+    <ion-img src="assets/imgs/slide-2.png"></ion-img>
   </ion-text>
-  <ion-text>
-    <p>
-      If you get lost, the
-      <a href="https://ionicframework.com/docs">docs</a> will show you the way
-    </p>
-  </ion-text>
-  <ion-menu-toggle>
-    <ion-button menuToggle>Toggle Menu</ion-button>
-  </ion-menu-toggle>
+  <form>
+    <ion-item class="input-group">
+      <ion-label position="stacked">Email</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+    <ion-item  class="input-group">
+      <ion-label position="stacked">passowrd</ion-label>
+      <ion-input type="text" ></ion-input>
+    </ion-item>
+    <ion-button expand="block" color="primary" >Login</ion-button>
+    <ion-button expand="block" color="primary" fill="outline" >Registrar</ion-button>
+  </form>
 </ion-content>
