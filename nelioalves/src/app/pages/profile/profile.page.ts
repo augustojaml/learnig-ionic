@@ -11,5 +11,10 @@ export class ProfilePage implements OnInit {
 
   constructor(private storageService: StorageService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    const localUser = this.storageService.getLocalUser();
+    if (localUser && localUser.email) {
+      this.email = localUser.email;
+    }
+  }
 }
