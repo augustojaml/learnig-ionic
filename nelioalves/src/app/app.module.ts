@@ -1,3 +1,4 @@
+import { StorageService } from './../services/storage.service';
 import { CategoriesService } from './../services/domain/categories.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -25,6 +26,7 @@ import { AuthService } from 'src/services/auth.service';
     CategoriesService,
     AuthService,
     HttpErrorInterceptorProvider,
+    StorageService,
   ],
   bootstrap: [AppComponent],
 })

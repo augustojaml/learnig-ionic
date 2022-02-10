@@ -24,7 +24,7 @@ export class HomePage implements OnInit {
   login() {
     this.authService.authenticate(this.credential).subscribe(
       (response) => {
-        console.log(response.headers.get('Authorization'));
+        this.authService.successFulLogin(response.headers.get('Authorization'));
         this.route.navigate(['/categories']);
       },
       (error) => {}
