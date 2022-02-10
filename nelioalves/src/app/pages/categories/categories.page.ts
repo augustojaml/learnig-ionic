@@ -1,3 +1,6 @@
+import { API_CONFIG } from './../../../config/api.config';
+import { CategoryDTO } from './../../../models/category.dto';
+import { CategoriesService } from '../../../services/domain/categories.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +9,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./categories.page.scss'],
 })
 export class CategoriesPage implements OnInit {
+  categories: CategoryDTO[] = [];
+  bucketUrl: string = API_CONFIG.bucketBaseUr;
 
-  constructor() { }
+  constructor(private categoriesService: CategoriesService) {}
 
   ngOnInit() {
-  }
+    // this.bucketUrl = API_CONFIG.bucketBaseUr;
 
+    this.categoriesService.findAll().subscribe(
+      (response) => {
+        this.categories = response;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
 }

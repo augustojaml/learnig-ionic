@@ -9,7 +9,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "api": "java -jar src/spring-boot-api/nelioalves-0.0.1-SNAPSHOT.jar --spring.profiles.active=test --spring.datasource.username=sa --spring.datasource.password="
   },
   "private": true,
   "dependencies": {
@@ -20,17 +21,18 @@
     "@angular/platform-browser-dynamic": "~13.0.0",
     "@angular/router": "~13.0.0",
     "@ionic/angular": "^6.0.0",
+    "axios": "^0.25.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.2.0",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~13.0.1",
-    "@angular/cli": "~13.0.1",
     "@angular-eslint/builder": "~13.0.1",
     "@angular-eslint/eslint-plugin": "~13.0.1",
     "@angular-eslint/eslint-plugin-template": "~13.0.1",
     "@angular-eslint/template-parser": "~13.0.1",
+    "@angular/cli": "~13.0.1",
     "@angular/compiler": "~13.0.0",
     "@angular/compiler-cli": "~13.0.0",
     "@angular/language-service": "~13.0.0",

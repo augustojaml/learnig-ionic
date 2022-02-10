@@ -30,3 +30,5 @@ npm-debug.log*
 /platforms
 /plugins
 /www
+
+/src/spring-boot-api/nelioalves-0.0.1-SNAPSHOT.jar
