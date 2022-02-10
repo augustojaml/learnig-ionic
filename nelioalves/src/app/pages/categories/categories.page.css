@@ -1,0 +1,11 @@
+.app-categories {
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --padding-top: 16px;
+  --padding-start: 16px;
+}
+
+.app-categories ion-item {
+  --padding-start: 0;
+}
+/*# sourceMappingURL=categories.page.css.map */

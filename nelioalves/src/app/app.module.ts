@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpErrorInterceptorProvider } from 'src/interceptors/http-error-interceptor';
 import { AuthService } from 'src/services/auth.service';
+import { ClientService } from 'src/services/domain/client.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,6 +28,7 @@ import { AuthService } from 'src/services/auth.service';
     AuthService,
     HttpErrorInterceptorProvider,
     StorageService,
+    ClientService,
   ],
   bootstrap: [AppComponent],
 })
