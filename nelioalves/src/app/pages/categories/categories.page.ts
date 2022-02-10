@@ -15,15 +15,11 @@ export class CategoriesPage implements OnInit {
   constructor(private categoriesService: CategoriesService) {}
 
   ngOnInit() {
-    // this.bucketUrl = API_CONFIG.bucketBaseUr;
-
     this.categoriesService.findAll().subscribe(
       (response) => {
         this.categories = response;
       },
-      (error) => {
-        console.log(error);
-      }
+      (error) => {}
     );
   }
 }

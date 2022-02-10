@@ -7,9 +7,13 @@ import { API_CONFIG } from './../../config/api.config';
 
 @Injectable()
 export class CategoriesService {
+  endPoint = 'categories';
+
   constructor(public http: HttpClient) {}
 
   findAll(): Observable<CategoryDTO[]> {
-    return this.http.get<CategoryDTO[]>(`${API_CONFIG.baseUrl}/categories`);
+    return this.http.get<CategoryDTO[]>(
+      `${API_CONFIG.baseUrl}/${this.endPoint}`
+    );
   }
 }
