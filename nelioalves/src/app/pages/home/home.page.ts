@@ -2,6 +2,7 @@ import { CredentialDTO } from './../../../models/credential.dto';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
+import { AuthService } from 'src/services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -14,11 +15,20 @@ export class HomePage implements OnInit {
     password: '',
   };
 
-  constructor(private route: Router, private menuController: MenuController) {}
+  constructor(
+    private route: Router,
+    private menuController: MenuController,
+    private authService: AuthService
+  ) {}
 
   login() {
-    console.log(this.credential);
-    this.route.navigate(['/categories']);
+    this.authService.authenticate(this.credential).subscribe(
+      (response) => {
+        console.log(response.headers.get('Authorization'));
+        this.route.navigate(['/categories']);
+      },
+      (error) => {}
+    );
   }
 
   ionViewWillEnter() {

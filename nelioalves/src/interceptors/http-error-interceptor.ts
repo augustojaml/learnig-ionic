@@ -23,6 +23,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
     return next.handle(req).pipe(
       catchError((error: HttpErrorResponse) => {
         console.log('### HOUVE UM ERROR AQUI ###');
+
         let objectError: IError;
         if (error.hasOwnProperty('error') && error.error === null) {
           objectError = {
@@ -31,7 +32,16 @@ export class HttpErrorInterceptor implements HttpInterceptor {
             message: error.message,
           };
         }
-        console.log(JSON.stringify(objectError, null, 2));
+
+        if (error.hasOwnProperty('error') && error.error !== null) {
+          objectError = {
+            error: JSON.parse(error.error),
+            statusCode: error.status,
+            message: error.message,
+          };
+        }
+
+        console.log(objectError);
         return throwError(objectError);
       })
     ) as any;
