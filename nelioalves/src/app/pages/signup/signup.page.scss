@@ -17,6 +17,17 @@ ion-item {
   --padding-end: 0;
 }
 
+ion-item.radio {
+  font-size: 0.9rem;
+  ion-label {
+    font-weight: 400;
+  }
+}
+
+ion-label {
+  font-weight: bold;
+}
+
 ion-radio-group div {
   padding-bottom: 1rem;
 }

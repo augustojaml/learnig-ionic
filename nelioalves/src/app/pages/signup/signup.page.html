@@ -24,11 +24,11 @@
         <ion-list-header>
           <ion-label>Tipo</ion-label>
         </ion-list-header>
-        <ion-item>
+        <ion-item class="radio">
           <ion-label>Pessoa Física</ion-label>
           <ion-radio slot="end" color="primary" value="1"></ion-radio>
         </ion-item>
-        <ion-item>
+        <ion-item class="radio">
           <ion-label>Pessoa Jurídica</ion-label>
           <ion-radio slot="end" color="secondary" value="2"></ion-radio>
         </ion-item>
@@ -76,18 +76,24 @@
     </ion-item>
 
     <ion-item class="input-group">
-      <ion-label>Estado *</ion-label>
-      <ion-select formControlName="cityId" placeholder="Selecione a cidade">
-        <ion-select-option value="1">Minas Gerais</ion-select-option>
-        <ion-select-option value="2">São Paulo</ion-select-option>
+      <ion-label>Estado</ion-label>
+      <ion-select
+        placeholder="Estados"
+        (ionChange)="updateCities()"
+        formControlName="stateId"
+      >
+        <ion-select-option *ngFor="let state of states" [value]="state.id"
+          >{{state.name}}</ion-select-option
+        >
       </ion-select>
     </ion-item>
 
     <ion-item class="input-group">
-      <ion-label>Cidade *</ion-label>
-      <ion-select formControlName="stateId" placeholder="Selecione a cidade">
-        <ion-select-option value="1">Uberlândia</ion-select-option>
-        <ion-select-option value="2">Campinas</ion-select-option>
+      <ion-label>Cidade</ion-label>
+      <ion-select placeholder="Cidades" formControlName="cityId">
+        <ion-select-option *ngFor="let city of cities" [value]="city.id"
+          >{{city.name}}</ion-select-option
+        >
       </ion-select>
     </ion-item>
 

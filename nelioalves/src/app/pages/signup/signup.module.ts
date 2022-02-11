@@ -7,6 +7,8 @@ import { IonicModule } from '@ionic/angular';
 import { SignupPageRoutingModule } from './signup-routing.module';
 
 import { SignupPage } from './signup.page';
+import { CitiesService } from 'src/services/domain/cities.service';
+import { StatesService } from 'src/services/domain/states.service';
 
 @NgModule({
   imports: [
@@ -17,5 +19,6 @@ import { SignupPage } from './signup.page';
     SignupPageRoutingModule,
   ],
   declarations: [SignupPage],
+  providers: [CitiesService, StatesService],
 })
 export class SignupPageModule {}

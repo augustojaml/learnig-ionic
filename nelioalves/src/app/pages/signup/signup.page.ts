@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { CityDTO } from 'src/models/city.dto';
+import { StateDTO } from 'src/models/state.dto';
+import { CitiesService } from 'src/services/domain/cities.service';
+import { StatesService } from 'src/services/domain/states.service';
 
 @Component({
   selector: 'app-signup',
@@ -7,7 +11,14 @@ import { Validators, FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./signup.page.scss'],
 })
 export class SignupPage implements OnInit {
-  constructor(private formBuild: FormBuilder) {
+  states: StateDTO[] = [];
+  cities: CityDTO[] = [];
+
+  constructor(
+    private formBuild: FormBuilder,
+    private citiesService: CitiesService,
+    private statesService: StatesService
+  ) {
     this.formGroup = this.formBuild.group({
       name: [
         'Augusto Monteiro',
@@ -50,5 +61,24 @@ export class SignupPage implements OnInit {
     console.log('Enviou o form');
   }
 
-  ngOnInit() {}
+  updateCities() {
+    this.citiesService.findAll(this.formGroup.value.stateId).subscribe(
+      (response) => {
+        this.cities = response;
+        this.formGroup.controls.cityId.setValue(null);
+      },
+      (error) => {}
+    );
+  }
+
+  ngOnInit() {
+    this.statesService.findAll().subscribe(
+      (response) => {
+        this.states = response;
+        this.formGroup.controls.stateId.setValue(this.states[0].id);
+        this.updateCities();
+      },
+      (error) => {}
+    );
+  }
 }
