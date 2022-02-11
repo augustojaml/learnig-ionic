@@ -1,88 +1,98 @@
-<ion-header [translucent]="true">
+<ion-header translucent>
   <ion-toolbar>
-    <ion-buttons>
-      <ion-menu-button></ion-menu-button>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
     </ion-buttons>
-    <ion-title>Signup</ion-title>
+    <ion-title>Registrar</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="page-singup">
-  <form>
+  <form [formGroup]="formGroup" (ngSubmit)="signupUser()">
     <ion-item class="input-group">
       <ion-label position="stacked">Name *</ion-label>
-      <ion-input name="name" type="text"></ion-input>
+      <ion-input formControlName="name" type="text"></ion-input>
     </ion-item>
 
     <ion-item class="input-group">
       <ion-label position="stacked">E-mail *</ion-label>
-      <ion-input name="email" type="text"></ion-input>
+      <ion-input formControlName="email" type="text"></ion-input>
     </ion-item>
 
-    <ion-radio-group ion-radio-grouallow-empty-selection value="cpf">
+    <ion-radio-group formControlName="type" value="1">
       <div>
         <ion-list-header>
-          <ion-label>Pizza Topping</ion-label>
+          <ion-label>Tipo</ion-label>
         </ion-list-header>
         <ion-item>
           <ion-label>Pessoa Física</ion-label>
-          <ion-radio slot="end" color="primary" value="cpf"></ion-radio>
+          <ion-radio slot="end" color="primary" value="1"></ion-radio>
         </ion-item>
-
         <ion-item>
           <ion-label>Pessoa Jurídica</ion-label>
-          <ion-radio slot="end" color="secondary" value="cnpj"></ion-radio>
+          <ion-radio slot="end" color="secondary" value="2"></ion-radio>
         </ion-item>
       </div>
     </ion-radio-group>
 
     <ion-item class="input-group">
-      <ion-label position="stacked">CPF ou CNPJ</ion-label>
-      <ion-input name="cpfOrCnpj" type="text"></ion-input>
+      <ion-label position="stacked">CPF ou CNPJ *</ion-label>
+      <ion-input formControlName="cpfOrCnpj" type="text"></ion-input>
     </ion-item>
 
     <ion-item class="input-group">
-      <ion-label position="stacked">Password</ion-label>
-      <ion-input name="cpfOrCnpj" type="text"></ion-input>
+      <ion-label position="stacked">Password *</ion-label>
+      <ion-input formControlName="password" type="text"></ion-input>
     </ion-item>
 
     <ion-item class="input-group">
-      <ion-label position="stacked">Password</ion-label>
-      <ion-input name="cpfOrCnpj" type="text"></ion-input>
+      <ion-label position="stacked">Logradouro *</ion-label>
+      <ion-input formControlName="neighborhood" type="text"></ion-input>
     </ion-item>
 
     <ion-item class="input-group">
-      <ion-label position="stacked">Logradouro</ion-label>
-      <ion-input name="neighborhood" type="text"></ion-input>
-    </ion-item>
-
-    <ion-item class="input-group">
-      <ion-label position="stacked">Número</ion-label>
-      <ion-input name="number" type="text"></ion-input>
+      <ion-label position="stacked">Número *</ion-label>
+      <ion-input formControlName="number" type="text"></ion-input>
     </ion-item>
 
     <ion-item class="input-group">
       <ion-label position="stacked">Complemento</ion-label>
-      <ion-input name="complement" type="text"></ion-input>
+      <ion-input formControlName="complement" type="text"></ion-input>
     </ion-item>
 
     <ion-item class="input-group">
       <ion-label position="stacked">Bairro</ion-label>
-      <ion-input name="district" type="text"></ion-input>
+      <ion-input formControlName="district" type="text"></ion-input>
     </ion-item>
 
     <ion-item class="input-group">
-      <ion-label position="stacked">CEP</ion-label>
-      <ion-input name="zipCode" type="text"></ion-input>
+      <ion-label position="stacked">CEP *</ion-label>
+      <ion-input formControlName="zipCode" type="text"></ion-input>
     </ion-item>
 
     <ion-item class="input-group">
-      <ion-label position="stacked">Telefone</ion-label>
-      <ion-input name="phone1" type="text"></ion-input>
+      <ion-label position="stacked">Telefone *</ion-label>
+      <ion-input formControlName="phone1" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item class="input-group">
+      <ion-label>Estado *</ion-label>
+      <ion-select formControlName="cityId" placeholder="Selecione a cidade">
+        <ion-select-option value="1">Minas Gerais</ion-select-option>
+        <ion-select-option value="2">São Paulo</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item class="input-group">
+      <ion-label>Cidade *</ion-label>
+      <ion-select formControlName="stateId" placeholder="Selecione a cidade">
+        <ion-select-option value="1">Uberlândia</ion-select-option>
+        <ion-select-option value="2">Campinas</ion-select-option>
+      </ion-select>
     </ion-item>
 
     <ion-button
-      (click)="singUp()"
+      type="submit"
       expand="block"
       color="primary"
       style="margin: 1rem 0"
