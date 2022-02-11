@@ -50,7 +50,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
 
         switch (objectError.statusCode) {
           case 401:
-            this.handle401(objectError.error);
+            this.handle401(objectError);
             break;
 
           case 403:
@@ -69,8 +69,8 @@ export class HttpErrorInterceptor implements HttpInterceptor {
   async handle401(error: any) {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
-      header: error.error,
-      subHeader: error.message,
+      header: error.statusCode,
+      subHeader: JSON.parse(error.error).message,
       message: '',
       buttons: ['OK'],
     });
