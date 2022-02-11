@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { StorageService } from 'src/services/storage.service';
 import { ClientService } from 'src/services/domain/client.service';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -15,7 +16,8 @@ export class ProfilePage implements OnInit {
 
   constructor(
     private storageService: StorageService,
-    private clientService: ClientService
+    private clientService: ClientService,
+    private route: Router
   ) {}
 
   getImageBucketUrl() {
@@ -35,8 +37,14 @@ export class ProfilePage implements OnInit {
           this.client = response;
           this.getImageBucketUrl();
         },
-        (error) => {}
+        (error) => {
+          if (error.statusCode === 403) {
+            this.route.navigate(['/home']);
+          }
+        }
       );
+    } else {
+      this.route.navigate(['/home']);
     }
   }
 }

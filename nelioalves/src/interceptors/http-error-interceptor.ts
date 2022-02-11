@@ -1,3 +1,4 @@
+import { StorageService } from 'src/services/storage.service';
 import {
   HttpErrorResponse,
   HttpEvent,
@@ -8,6 +9,7 @@ import {
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { Injectable } from '@angular/core';
 
 interface IError {
   error: any;
@@ -15,7 +17,10 @@ interface IError {
   message: string;
 }
 
+@Injectable()
 export class HttpErrorInterceptor implements HttpInterceptor {
+  constructor(private storageServe: StorageService) {}
+
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
@@ -39,10 +44,20 @@ export class HttpErrorInterceptor implements HttpInterceptor {
           };
         }
 
+        switch (objectError.statusCode) {
+          case 403:
+            this.handle403();
+            break;
+        }
+
         console.log(objectError);
         return throwError(objectError);
       })
     ) as any;
+  }
+
+  handle403() {
+    this.storageServe.setLocalUser(null);
   }
 }
 
