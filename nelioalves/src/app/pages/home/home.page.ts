@@ -39,6 +39,10 @@ export class HomePage implements OnInit {
     );
   }
 
+  singUp() {
+    this.route.navigate(['/signup']);
+  }
+
   ngOnInit() {
     this.authService.refreshToken().subscribe(
       (response) => {

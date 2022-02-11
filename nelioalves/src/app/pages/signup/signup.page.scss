@@ -1,0 +1,22 @@
+ion-content.page-singup {
+  --padding-start: 24px;
+  --padding-end: 24px;
+  --padding-top: 24px;
+  --padding-bottom: 24px;
+}
+
+ion-list-header {
+  padding-inline-start: 0;
+  ion-label {
+    margin: 0;
+  }
+}
+
+ion-item {
+  --padding-start: 0;
+  --padding-end: 0;
+}
+
+ion-radio-group div {
+  padding-bottom: 1rem;
+}
