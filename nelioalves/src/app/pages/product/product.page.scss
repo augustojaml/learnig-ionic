@@ -1,0 +1,19 @@
+ion-content.page-product {
+  --padding-start: 24px;
+  --padding-end: 24px;
+  --padding-top: 24px;
+  --padding-bottom: 24px;
+  ion-item {
+    --padding-start: 0;
+    --padding-end: 0;
+    h2 {
+      font-weight: 600;
+      font-size: 1.5rem;
+    }
+
+    p {
+      font-weight: 400;
+      font-size: 1rem;
+    }
+  }
+}

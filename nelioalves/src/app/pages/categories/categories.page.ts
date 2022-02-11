@@ -2,6 +2,8 @@ import { API_CONFIG } from './../../../config/api.config';
 import { CategoryDTO } from './../../../models/category.dto';
 import { CategoriesService } from '../../../services/domain/categories.service';
 import { Component, OnInit } from '@angular/core';
+import { ProductDTO } from 'src/models/product.dto';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-categories',
@@ -12,7 +14,16 @@ export class CategoriesPage implements OnInit {
   categories: CategoryDTO[] = [];
   bucketUrl: string = API_CONFIG.bucketBaseUr;
 
-  constructor(private categoriesService: CategoriesService) {}
+  constructor(
+    private categoriesService: CategoriesService,
+    private route: Router
+  ) {}
+
+  showProducts(category: CategoryDTO) {
+    // (click)="showProducts(product)"
+    console.log(category);
+    this.route.navigate(['/product']);
+  }
 
   ngOnInit() {
     this.categoriesService.findAll().subscribe(

@@ -8,7 +8,10 @@
 </ion-header>
 
 <ion-content class="app-categories">
-  <ion-list *ngFor="let category of categories">
+  <ion-list
+    *ngFor="let category of categories"
+    (click)="showProducts(category)"
+  >
     <ion-item button detail="false">
       <ion-thumbnail slot="start">
         <img src="{{bucketUrl}}/cat{{category.id}}.jpg" />
