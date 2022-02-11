@@ -3,13 +3,15 @@ import { CategoriesService } from './../services/domain/categories.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpErrorInterceptorProvider } from 'src/interceptors/http-error-interceptor';
+import { HttpAuthInterceptorProvider } from 'src/interceptors/http-auth-interceptor';
+
 import { AuthService } from 'src/services/auth.service';
 import { ClientService } from 'src/services/domain/client.service';
 
@@ -26,6 +28,7 @@ import { ClientService } from 'src/services/domain/client.service';
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     CategoriesService,
     AuthService,
+    HttpAuthInterceptorProvider,
     HttpErrorInterceptorProvider,
     StorageService,
     ClientService,

@@ -22,8 +22,6 @@ export class HttpErrorInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(
       catchError((error: HttpErrorResponse) => {
-        console.log('### HOUVE UM ERROR AQUI ###');
-
         let objectError: IError;
         if (error.hasOwnProperty('error') && error.error === null) {
           objectError = {
