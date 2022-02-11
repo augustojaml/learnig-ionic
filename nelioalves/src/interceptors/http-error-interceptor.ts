@@ -1,3 +1,4 @@
+import { FieldMessage } from './../models/fieldmessage';
 import { StorageService } from 'src/services/storage.service';
 import {
   HttpErrorResponse,
@@ -56,11 +57,16 @@ export class HttpErrorInterceptor implements HttpInterceptor {
           case 403:
             this.handle403();
             break;
+
+          case 422:
+            this.handle422(objectError);
+            break;
+
           default:
             this.handleDefaultError(objectError);
         }
 
-        console.log(objectError);
+        //console.log(objectError);
         return throwError(objectError);
       })
     ) as any;
@@ -76,14 +82,24 @@ export class HttpErrorInterceptor implements HttpInterceptor {
     });
     await alert.present();
   }
-
   handle403() {
     this.storageServe.setLocalUser(null);
   }
 
-  async handleDefaultError(objectError: IError) {
-    const error = objectError.error;
+  async handle422(error: any) {
+    // console.log(JSON.parse(error.error).errors);
 
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Error: ' + error.statusCode,
+      subHeader: 'Validation Error',
+      message: this.listErrors(JSON.parse(error.error).errors),
+      buttons: ['OK'],
+    });
+    await alert.present();
+  }
+
+  async handleDefaultError(objectError: IError) {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
       header: String(objectError.statusCode),
@@ -92,6 +108,15 @@ export class HttpErrorInterceptor implements HttpInterceptor {
       buttons: ['OK'],
     });
     await alert.present();
+  }
+  private listErrors(errors: FieldMessage[]): string {
+    let errorHtml: string = '';
+    for (var i = 0; i < errors.length; i++) {
+      errorHtml =
+        errorHtml +
+        `<p><strong>${errors[i].fieldName}</strong> : ${errors[i].message}</p>`;
+    }
+    return errorHtml;
   }
 }
 

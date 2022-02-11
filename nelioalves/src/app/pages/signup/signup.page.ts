@@ -1,8 +1,11 @@
+import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { CityDTO } from 'src/models/city.dto';
 import { StateDTO } from 'src/models/state.dto';
 import { CitiesService } from 'src/services/domain/cities.service';
+import { ClientService } from 'src/services/domain/client.service';
 import { StatesService } from 'src/services/domain/states.service';
 
 @Component({
@@ -17,7 +20,10 @@ export class SignupPage implements OnInit {
   constructor(
     private formBuild: FormBuilder,
     private citiesService: CitiesService,
-    private statesService: StatesService
+    private statesService: StatesService,
+    private clientService: ClientService,
+    private alertController: AlertController,
+    private router: Router
   ) {
     this.formGroup = this.formBuild.group({
       name: [
@@ -29,12 +35,12 @@ export class SignupPage implements OnInit {
         ],
       ],
       email: [
-        'jamonteirolima@gmail.com',
+        'jamonteirolima@gmail4.com',
         [Validators.required, Validators.email],
       ],
-      type: ['1', [Validators.required]],
+      type: ['2', [Validators.required]],
       cpfOrCnpj: [
-        '06134596280',
+        '65109121000111',
         [
           Validators.required,
           Validators.minLength(11),
@@ -58,7 +64,14 @@ export class SignupPage implements OnInit {
   formGroup: FormGroup;
 
   signupUser() {
-    console.log('Enviou o form');
+    console.log(JSON.stringify(this.formGroup.value, null, 2));
+
+    this.clientService.insert(this.formGroup.value).subscribe(
+      (response) => {
+        this.showAlertInsertOk();
+      },
+      (error) => {}
+    );
   }
 
   updateCities() {
@@ -69,6 +82,24 @@ export class SignupPage implements OnInit {
       },
       (error) => {}
     );
+  }
+
+  async showAlertInsertOk() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Register customers',
+      subHeader: 'Client registered successfully',
+      message: '',
+      buttons: [
+        {
+          text: 'Ok',
+          handler: () => {
+            this.router.navigate(['/home'], { replaceUrl: true });
+          },
+        },
+      ],
+    });
+    await alert.present();
   }
 
   ngOnInit() {
