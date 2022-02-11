@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 import { StorageService } from '../storage.service';
 
 @Injectable()
-export class ClientService {
+export class ClientsService {
   constructor(
     public httpClient: HttpClient,
     public storageService: StorageService
@@ -19,7 +19,7 @@ export class ClientService {
   }
 
   getImageFromBucket(id: string): Observable<any> {
-    const bucketUrl = `${API_CONFIG.bucketBaseUr}/cp${id}.jpg`;
+    const bucketUrl = `${API_CONFIG.bucketBaseUrl}/cp${id}.jpg`;
     return this.httpClient.get(bucketUrl, { responseType: 'blob' });
   }
 

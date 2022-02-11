@@ -1,3 +1,4 @@
+import { ProductsService } from './../services/domain/products.service';
 import { StorageService } from './../services/storage.service';
 import { CategoriesService } from './../services/domain/categories.service';
 import { NgModule } from '@angular/core';
@@ -13,7 +14,7 @@ import { HttpErrorInterceptorProvider } from 'src/interceptors/http-error-interc
 import { HttpAuthInterceptorProvider } from 'src/interceptors/http-auth-interceptor';
 
 import { AuthService } from 'src/services/auth.service';
-import { ClientService } from 'src/services/domain/client.service';
+import { ClientsService } from 'src/services/domain/clients.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -31,7 +32,8 @@ import { ClientService } from 'src/services/domain/client.service';
     HttpAuthInterceptorProvider,
     HttpErrorInterceptorProvider,
     StorageService,
-    ClientService,
+    ClientsService,
+    ProductsService,
   ],
   bootstrap: [AppComponent],
 })

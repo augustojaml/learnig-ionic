@@ -5,7 +5,7 @@ import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { CityDTO } from 'src/models/city.dto';
 import { StateDTO } from 'src/models/state.dto';
 import { CitiesService } from 'src/services/domain/cities.service';
-import { ClientService } from 'src/services/domain/client.service';
+import { ClientsService } from 'src/services/domain/clients.service';
 import { StatesService } from 'src/services/domain/states.service';
 
 @Component({
@@ -21,7 +21,7 @@ export class SignupPage implements OnInit {
     private formBuild: FormBuilder,
     private citiesService: CitiesService,
     private statesService: StatesService,
-    private clientService: ClientService,
+    private clientsService: ClientsService,
     private alertController: AlertController,
     private router: Router
   ) {
@@ -66,7 +66,7 @@ export class SignupPage implements OnInit {
   signupUser() {
     console.log(JSON.stringify(this.formGroup.value, null, 2));
 
-    this.clientService.insert(this.formGroup.value).subscribe(
+    this.clientsService.insert(this.formGroup.value).subscribe(
       (response) => {
         this.showAlertInsertOk();
       },

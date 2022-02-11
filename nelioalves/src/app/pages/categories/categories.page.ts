@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class CategoriesPage implements OnInit {
   categories: CategoryDTO[] = [];
-  bucketUrl: string = API_CONFIG.bucketBaseUr;
+  bucketUrl: string = API_CONFIG.bucketBaseUrl;
 
   constructor(
     private categoriesService: CategoriesService,
@@ -20,9 +20,7 @@ export class CategoriesPage implements OnInit {
   ) {}
 
   showProducts(category: CategoryDTO) {
-    // (click)="showProducts(product)"
-    console.log(category);
-    this.route.navigate(['/product']);
+    this.route.navigate(['/product', { id: category.id }]);
   }
 
   ngOnInit() {

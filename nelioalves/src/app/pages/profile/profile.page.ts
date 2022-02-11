@@ -2,7 +2,7 @@ import { API_CONFIG } from './../../../config/api.config';
 import { ClientDTO } from './../../../models/client.dto';
 import { Component, OnInit } from '@angular/core';
 import { StorageService } from 'src/services/storage.service';
-import { ClientService } from 'src/services/domain/client.service';
+import { ClientsService } from 'src/services/domain/clients.service';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 
@@ -16,14 +16,14 @@ export class ProfilePage implements OnInit {
 
   constructor(
     private storageService: StorageService,
-    private clientService: ClientService,
+    private clientsService: ClientsService,
     private route: Router
   ) {}
 
   getImageBucketUrl() {
-    this.clientService.getImageFromBucket(this.client.id).subscribe(
+    this.clientsService.getImageFromBucket(this.client.id).subscribe(
       (response) => {
-        this.client.imageUrl = `${API_CONFIG.bucketBaseUr}/cp${this.client.id}.jpg`;
+        this.client.imageUrl = `${API_CONFIG.bucketBaseUrl}/cp${this.client.id}.jpg`;
       },
       (error) => {}
     );
@@ -32,7 +32,7 @@ export class ProfilePage implements OnInit {
   ngOnInit() {
     const localUser = this.storageService.getLocalUser();
     if (localUser && localUser.email) {
-      this.clientService.findByEmail(localUser.email).subscribe(
+      this.clientsService.findByEmail(localUser.email).subscribe(
         (response) => {
           this.client = response;
           this.getImageBucketUrl();

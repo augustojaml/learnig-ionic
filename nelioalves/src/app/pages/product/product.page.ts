@@ -1,5 +1,8 @@
+import { API_CONFIG } from 'src/config/api.config';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductDTO } from './../../../models/product.dto';
 import { Component, OnInit } from '@angular/core';
+import { ProductsService } from 'src/services/domain/products.service';
 
 @Component({
   selector: 'app-product',
@@ -9,25 +12,38 @@ import { Component, OnInit } from '@angular/core';
 export class ProductPage implements OnInit {
   products: ProductDTO[] = [];
 
-  constructor() {}
+  categoriesId: string = '';
+
+  constructor(
+    private activeRoute: ActivatedRoute,
+    private productsService: ProductsService
+  ) {}
+
+  getCategoryId() {
+    this.productsService
+      .findByCategories(this.activeRoute.snapshot.params.id)
+      .subscribe(
+        ({ content }: any) => {
+          this.products = content;
+          this.loadingImageUrl();
+        },
+        (error) => {}
+      );
+  }
+
+  loadingImageUrl() {
+    for (let i = 0; i < this.products.length; i++) {
+      let product = this.products[i];
+      this.productsService.getSmallImageFromBucket(product.id).subscribe(
+        (response) => {
+          product.imageUrl = `${API_CONFIG.bucketBaseUrl}/prod${product.id}-small.jpg`;
+        },
+        (error) => {}
+      );
+    }
+  }
 
   ngOnInit() {
-    this.products = [
-      {
-        id: '1',
-        name: 'Mouse',
-        price: 80.99,
-      },
-      {
-        id: '2',
-        name: 'Teclado',
-        price: 124.0,
-      },
-      {
-        id: '3',
-        name: 'Mouse Pad',
-        price: 30.0,
-      },
-    ];
+    this.getCategoryId();
   }
 }
