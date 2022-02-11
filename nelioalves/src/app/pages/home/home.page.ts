@@ -21,6 +21,14 @@ export class HomePage implements OnInit {
     private authService: AuthService
   ) {}
 
+  ionViewWillEnter() {
+    this.menuController.enable(false);
+  }
+
+  ionViewDidLeave() {
+    this.menuController.enable(true);
+  }
+
   login() {
     this.authService.authenticate(this.credential).subscribe(
       (response) => {
@@ -31,13 +39,13 @@ export class HomePage implements OnInit {
     );
   }
 
-  ionViewWillEnter() {
-    this.menuController.enable(false);
+  ngOnInit() {
+    this.authService.refreshToken().subscribe(
+      (response) => {
+        this.authService.successFulLogin(response.headers.get('Authorization'));
+        this.route.navigate(['/categories']);
+      },
+      (error) => {}
+    );
   }
-
-  ionViewDidLeave() {
-    this.menuController.enable(true);
-  }
-
-  ngOnInit() {}
 }

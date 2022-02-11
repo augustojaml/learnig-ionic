@@ -21,6 +21,17 @@ export class AuthService {
     });
   }
 
+  refreshToken() {
+    return this.httpClient.post(
+      `${API_CONFIG.baseUrl}/auth/refresh_token`,
+      {},
+      {
+        observe: 'response',
+        responseType: 'text',
+      }
+    );
+  }
+
   successFulLogin(bearerToken: string) {
     const token = bearerToken.substring(7);
     const user: LocalUser = {
