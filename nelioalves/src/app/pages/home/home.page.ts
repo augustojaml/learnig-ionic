@@ -1,7 +1,7 @@
 import { CredentialDTO } from './../../../models/credential.dto';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MenuController } from '@ionic/angular';
+import { AlertController, MenuController } from '@ionic/angular';
 import { AuthService } from 'src/services/auth.service';
 
 @Component({

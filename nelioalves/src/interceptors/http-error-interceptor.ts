@@ -10,6 +10,7 @@ import {
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
+import { AlertController } from '@ionic/angular';
 
 interface IError {
   error: any;
@@ -19,7 +20,10 @@ interface IError {
 
 @Injectable()
 export class HttpErrorInterceptor implements HttpInterceptor {
-  constructor(private storageServe: StorageService) {}
+  constructor(
+    private storageServe: StorageService,
+    private alertController: AlertController
+  ) {}
 
   intercept(
     req: HttpRequest<any>,
@@ -38,16 +42,22 @@ export class HttpErrorInterceptor implements HttpInterceptor {
 
         if (error.hasOwnProperty('error') && error.error !== null) {
           objectError = {
-            error: JSON.parse(error.error),
+            error: error.error,
             statusCode: error.status,
             message: error.message,
           };
         }
 
         switch (objectError.statusCode) {
+          case 401:
+            this.handle401(objectError.error);
+            break;
+
           case 403:
             this.handle403();
             break;
+          default:
+            this.handleDefaultError(objectError);
         }
 
         console.log(objectError);
@@ -56,8 +66,32 @@ export class HttpErrorInterceptor implements HttpInterceptor {
     ) as any;
   }
 
+  async handle401(error: any) {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: error.error,
+      subHeader: error.message,
+      message: '',
+      buttons: ['OK'],
+    });
+    await alert.present();
+  }
+
   handle403() {
     this.storageServe.setLocalUser(null);
+  }
+
+  async handleDefaultError(objectError: IError) {
+    const error = objectError.error;
+
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: String(objectError.statusCode),
+      subHeader: objectError.error.error,
+      message: objectError.message,
+      buttons: ['OK'],
+    });
+    await alert.present();
   }
 }
 
