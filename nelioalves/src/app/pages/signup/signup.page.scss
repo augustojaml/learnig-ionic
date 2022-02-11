@@ -5,6 +5,21 @@ ion-content.page-singup {
   --padding-bottom: 24px;
 }
 
+.formGroup {
+  ion-label {
+    font-weight: bold;
+    font-size: 1.3rem;
+  }
+  .message {
+    height: 20px;
+    .error {
+      margin: 0.5rem 0;
+      font-style: italic;
+      color: red;
+    }
+  }
+}
+
 ion-list-header {
   padding-inline-start: 0;
   ion-label {
@@ -18,16 +33,13 @@ ion-item {
 }
 
 ion-item.radio {
-  font-size: 0.9rem;
   ion-label {
     font-weight: 400;
   }
 }
 
-ion-label {
-  font-weight: bold;
-}
-
-ion-radio-group div {
-  padding-bottom: 1rem;
+.formSelect {
+  ion-label {
+    font-size: 1rem;
+  }
 }
