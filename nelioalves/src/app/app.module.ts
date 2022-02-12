@@ -1,3 +1,4 @@
+import { CartsService } from './../services/domain/carts.service';
 import { ProductsService } from './../services/domain/products.service';
 import { StorageService } from './../services/storage.service';
 import { CategoriesService } from './../services/domain/categories.service';
@@ -34,6 +35,7 @@ import { ClientsService } from 'src/services/domain/clients.service';
     StorageService,
     ClientsService,
     ProductsService,
+    CartsService,
   ],
   bootstrap: [AppComponent],
 })

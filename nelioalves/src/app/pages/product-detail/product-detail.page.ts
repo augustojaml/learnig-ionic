@@ -1,3 +1,4 @@
+import { CartsService } from './../../../services/domain/carts.service';
 import { API_CONFIG } from 'src/config/api.config';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -18,7 +19,9 @@ export class ProductDetailPage implements OnInit {
 
   constructor(
     private productsService: ProductsService,
-    private activeRoute: ActivatedRoute
+    private activeRoute: ActivatedRoute,
+    private router: Router,
+    private cartsService: CartsService
   ) {}
 
   getImageUrlIfExists() {
@@ -27,6 +30,11 @@ export class ProductDetailPage implements OnInit {
       .subscribe((response) => {
         this.productDetail.imageUrl = `${API_CONFIG.bucketBaseUrl}/prod${this.productDetail.id}.jpg`;
       });
+  }
+
+  handleAddToCart(product: ProductDTO) {
+    this.cartsService.addProductToCart(product);
+    this.router.navigate(['/cart']);
   }
 
   ngOnInit() {
