@@ -1,0 +1,65 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/categories"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Confirmação de Pedido</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="page-orderConfirmation">
+  <ion-list lines="none">
+    <ion-item *ngFor="let item of cartItem">
+      <div class="item-cart">
+        <ion-thumbnail slot="end">
+          <img [src]="item.product.imageUrl || 'assets/imgs/prod.jpg'" />
+        </ion-thumbnail>
+        <ion-label>
+          <h3>{{item.product.name}}</h3>
+          <h5>R$ {{ item.product.price | number: "1.2-2" }}</h5>
+          <p>{{ item.quantity}}</p>
+        </ion-label>
+      </div>
+      <ion-label slot="end"
+        >R$ {{ (item.product.price * item.quantity) | number: "1.2-2"
+        }}</ion-label
+      >
+    </ion-item>
+  </ion-list>
+  <ion-item>
+    <ion-label><h1>Total</h1></ion-label>
+    <ion-label slot="end">R$ {{ total() | number: "1.2-2" }}</ion-label>
+  </ion-item>
+
+  <ion-item>
+    <ion-label class="client">
+      <h1>Cliente</h1>
+      <h2>{{ client?.name }}</h2>
+      <p>{{ client?.email }}</p>
+    </ion-label>
+  </ion-item>
+
+  <ion-item>
+    <ion-label *ngIf="address" class="client">
+      <h1>Endereço de Entrega</h1>
+      <h2>{{ address.neighborhood }}, {{ address.number}}</h2>
+      <p>
+        {{ address.complement }} {{ address.district}} CEP {{ address.zipCode}}
+      </p>
+      <p>{{ address.city.name }} {{ address.city.state.name}}</p>
+    </ion-label>
+  </ion-item>
+
+  <ion-item *ngIf="address &&  purchase.payment['@type'] === 'payment_card'">
+    <ion-label class="client">
+      <h1>Pagamento com cartão</h1>
+      <p>Parcelas: {{ purchase.payment.numberOfInstallments }}</p>
+    </ion-label>
+  </ion-item>
+
+  <ion-item *ngIf="address &&  purchase.payment['@type'] === 'payment_ticket'">
+    <ion-label class="client">
+      <h1>Pagamento com Boleto</h1>
+    </ion-label>
+  </ion-item>
+</ion-content>

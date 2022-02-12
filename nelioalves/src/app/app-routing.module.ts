@@ -64,6 +64,13 @@ const routes: Routes = [
         (m) => m.PaymentPageModule
       ),
   },
+  {
+    path: 'order-confirmation',
+    loadChildren: () =>
+      import('../pages/order-confirmation/order-confirmation.module').then(
+        (m) => m.OrderConfirmationPageModule
+      ),
+  },
 ];
 
 @NgModule({

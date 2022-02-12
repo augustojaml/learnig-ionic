@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PurchaseDTO } from 'src/models/purchase.dto';
 
 @Component({
@@ -15,7 +15,8 @@ export class PaymentPage implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) {
     this.formGroup = this.formBuilder.group({
       numberOfInstallments: [1, Validators.required],
@@ -25,12 +26,19 @@ export class PaymentPage implements OnInit {
 
   nextPage() {
     this.purchase.payment = this.formGroup.value;
-    console.log(this.purchase);
+    this.router.navigate([
+      '/order-confirmation',
+      { purchase: this.toString(this.purchase) },
+    ]);
   }
 
   ngOnInit() {
     this.purchase = JSON.parse(
       this.activatedRoute.snapshot.paramMap.get('purchase')
     );
+  }
+
+  toString(object: any) {
+    return JSON.stringify(object);
   }
 }

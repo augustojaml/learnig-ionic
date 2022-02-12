@@ -18,6 +18,10 @@ export class ClientsService {
     );
   }
 
+  findById(id: string): Observable<any> {
+    return this.httpClient.get<any>(`${API_CONFIG.baseUrl}/clients/${id}`);
+  }
+
   getImageFromBucket(id: string): Observable<any> {
     const bucketUrl = `${API_CONFIG.bucketBaseUrl}/cp${id}.jpg`;
     return this.httpClient.get(bucketUrl, { responseType: 'blob' });
