@@ -1,0 +1,24 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Endereço</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="page-addressPick">
+  <h5>Selecione o Endereço</h5>
+  <ion-list>
+    <ion-item button *ngFor="let address of addresses">
+      <ion-label>
+        <h2>{{ address.neighborhood }}, {{ address.number }}</h2>
+        <h3>
+          {{ address.complement }} {{ address.district }} CEP {{
+          address.zipCode}}
+        </h3>
+        <p>{{ address.city.name }}, {{ address.city.state.name }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

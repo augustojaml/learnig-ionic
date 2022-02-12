@@ -50,6 +50,10 @@ export class CartPage implements OnInit {
     return this.cartsService.totalProductCart();
   }
 
+  checkout() {
+    this.router.navigate(['/pick-address']);
+  }
+
   ngOnInit() {
     let cart = this.cartsService.getCart();
     this.cartItem = cart?.itemsCarts;

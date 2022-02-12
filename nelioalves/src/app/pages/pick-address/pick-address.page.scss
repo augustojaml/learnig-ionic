@@ -1,0 +1,15 @@
+ion-content.page-addressPick {
+  --padding-start: 24px;
+  --padding-end: 24px;
+  --padding-top: 24px;
+  --padding-bottom: 24px;
+  ion-item {
+    --padding-start: 0;
+    --padding-end: 0;
+    ion-label {
+      h2 {
+        font-weight: bold;
+      }
+    }
+  }
+}
