@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { AddressDTO } from 'src/models/address.dto';
 import { PurchaseDTO } from 'src/models/purchase.dto';
@@ -18,12 +19,16 @@ export class PickAddressPage implements OnInit {
   constructor(
     private storageService: StorageService,
     private clientsService: ClientsService,
-    private cartsService: CartsService
+    private cartsService: CartsService,
+    private router: Router
   ) {}
 
   nextPage(address: AddressDTO) {
     this.purchase.shippingAddress = { id: address.id };
-    console.log(this.purchase);
+    this.router.navigate([
+      '/payment',
+      { purchase: JSON.stringify(this.purchase) },
+    ]);
   }
 
   ngOnInit() {
