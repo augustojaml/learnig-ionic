@@ -9,7 +9,10 @@
 
 <ion-content class="page-product">
   <ion-list>
-    <ion-item *ngFor="let product of products">
+    <ion-item
+      *ngFor="let product of products"
+      (click)="handleProductDetail(product)"
+    >
       <ion-thumbnail slot="start">
         <img [src]="product.imageUrl || 'assets/imgs/prod.jpg'" />
       </ion-thumbnail>

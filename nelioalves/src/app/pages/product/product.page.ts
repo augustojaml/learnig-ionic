@@ -16,7 +16,8 @@ export class ProductPage implements OnInit {
 
   constructor(
     private activeRoute: ActivatedRoute,
-    private productsService: ProductsService
+    private productsService: ProductsService,
+    private router: Router
   ) {}
 
   getCategoryId() {
@@ -41,6 +42,10 @@ export class ProductPage implements OnInit {
         (error) => {}
       );
     }
+  }
+
+  handleProductDetail(product: ProductDTO) {
+    this.router.navigate(['/product-detail', { id: product.id }]);
   }
 
   ngOnInit() {

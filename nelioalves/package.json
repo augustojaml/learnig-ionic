@@ -10,7 +10,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "api": "java -jar src/spring-boot-api/nelioalves-0.0.1-SNAPSHOT.jar --spring.profiles.active=test --spring.datasource.username=sa --spring.datasource.password="
+    "back": "java -jar /home/augustojaml/Devops/projects/learning-springboot/nelioalves/target/nelioalves-0.0.1-SNAPSHOT.jar --spring.profiles.active=test --spring.datasource.username=sa --spring.datasource.password=",
+    "front": "ionic serve"
   },
   "private": true,
   "dependencies": {

@@ -16,11 +16,11 @@ export class CategoriesPage implements OnInit {
 
   constructor(
     private categoriesService: CategoriesService,
-    private route: Router
+    private router: Router
   ) {}
 
   showProducts(category: CategoryDTO) {
-    this.route.navigate(['/product', { id: category.id }]);
+    this.router.navigate(['/product', { id: category.id }]);
   }
 
   ngOnInit() {
