@@ -1,6 +1,6 @@
 import { API_CONFIG } from 'src/config/api.config';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProductDTO } from './../../../models/product.dto';
+import { ProductDTO } from '../../models/product.dto';
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from 'src/services/domain/products.service';
 

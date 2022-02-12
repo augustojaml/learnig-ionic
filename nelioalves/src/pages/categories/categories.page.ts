@@ -1,6 +1,6 @@
-import { API_CONFIG } from './../../../config/api.config';
-import { CategoryDTO } from './../../../models/category.dto';
-import { CategoriesService } from '../../../services/domain/categories.service';
+import { API_CONFIG } from '../../config/api.config';
+import { CategoryDTO } from '../../models/category.dto';
+import { CategoriesService } from '../../services/domain/categories.service';
 import { Component, OnInit } from '@angular/core';
 import { ProductDTO } from 'src/models/product.dto';
 import { Router } from '@angular/router';

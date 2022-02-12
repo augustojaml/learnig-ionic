@@ -1,4 +1,4 @@
-import { CartsService } from './../../../services/domain/carts.service';
+import { CartsService } from '../../services/domain/carts.service';
 import { API_CONFIG } from 'src/config/api.config';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';

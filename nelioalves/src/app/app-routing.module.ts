@@ -10,35 +10,52 @@ const routes: Routes = [
   {
     path: 'home',
     loadChildren: () =>
-      import('./pages/home/home.module').then((m) => m.HomePageModule),
+      import('../pages/home/home.module').then((m) => m.HomePageModule),
   },
   {
     path: 'categories',
-    loadChildren: () => import('./pages/categories/categories.module').then( m => m.CategoriesPageModule)
+    loadChildren: () =>
+      import('../pages/categories/categories.module').then(
+        (m) => m.CategoriesPageModule
+      ),
   },
   {
     path: 'profile',
-    loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
+    loadChildren: () =>
+      import('../pages/profile/profile.module').then(
+        (m) => m.ProfilePageModule
+      ),
   },
   {
     path: 'signup',
-    loadChildren: () => import('./pages/signup/signup.module').then( m => m.SignupPageModule)
+    loadChildren: () =>
+      import('../pages/signup/signup.module').then((m) => m.SignupPageModule),
   },
   {
     path: 'product',
-    loadChildren: () => import('./pages/product/product.module').then( m => m.ProductPageModule)
+    loadChildren: () =>
+      import('../pages/product/product.module').then(
+        (m) => m.ProductPageModule
+      ),
   },
   {
     path: 'product-detail',
-    loadChildren: () => import('./pages/product-detail/product-detail.module').then( m => m.ProductDetailPageModule)
+    loadChildren: () =>
+      import('../pages/product-detail/product-detail.module').then(
+        (m) => m.ProductDetailPageModule
+      ),
   },
   {
     path: 'cart',
-    loadChildren: () => import('./pages/cart/cart.module').then( m => m.CartPageModule)
+    loadChildren: () =>
+      import('../pages/cart/cart.module').then((m) => m.CartPageModule),
   },
   {
     path: 'pick-address',
-    loadChildren: () => import('./pages/pick-address/pick-address.module').then( m => m.PickAddressPageModule)
+    loadChildren: () =>
+      import('../pages/pick-address/pick-address.module').then(
+        (m) => m.PickAddressPageModule
+      ),
   },
 ];
 

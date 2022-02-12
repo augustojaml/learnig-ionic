@@ -1,5 +1,5 @@
-import { API_CONFIG } from './../../../config/api.config';
-import { ClientDTO } from './../../../models/client.dto';
+import { API_CONFIG } from '../../config/api.config';
+import { ClientDTO } from '../../models/client.dto';
 import { Component, OnInit } from '@angular/core';
 import { StorageService } from 'src/services/storage.service';
 import { ClientsService } from 'src/services/domain/clients.service';
