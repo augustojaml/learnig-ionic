@@ -13,6 +13,7 @@ export class AppComponent {
     // { title: 'Home', url: '/home', icon: '' },
     { title: 'Categories', url: '/categories', icon: '' },
     { title: 'Profile', url: '/profile', icon: '' },
+    { title: 'Carrinho', url: '/cart', icon: '' },
     { title: 'Logout', url: null, icon: null },
   ];
 
