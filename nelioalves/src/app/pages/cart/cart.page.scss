@@ -6,18 +6,33 @@ ion-content.page-cart {
   ion-item {
     --padding-start: 0;
     --padding-end: 0;
+    --inner-padding-end: 0;
     div {
       margin: 1rem 0;
       display: flex;
       align-items: center;
+      width: 100%;
       ion-thumbnail {
         margin-right: 1rem;
         width: 70px;
         height: 70px;
       }
-      h2 {
-        font-weight: bold;
-        font-size: 1.3rem;
+      ion-label {
+        h2 {
+          font-weight: bold;
+          font-size: 1.3rem;
+        }
+        .quantity {
+          display: flex;
+          align-items: center;
+          p {
+            margin: 0 1rem;
+          }
+          ion-fab-button {
+            width: 25px;
+            height: 25px;
+          }
+        }
       }
     }
   }

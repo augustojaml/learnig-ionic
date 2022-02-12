@@ -13,11 +13,45 @@
       <ion-thumbnail slot="start">
         <img [src]="item.product.imageUrl || 'assets/imgs/prod.jpg'" />
       </ion-thumbnail>
-      <ion-label>
+      <ion-label slot="start">
         <h2>{{ item.product.name }}</h2>
         <h3>R$ {{ item.product.price | number: "1.2-2" }}</h3>
-        <p>Quantity: {{ item.quantity }}</p>
+        <div class="quantity">
+          <ion-fab-button (click)="decreaseQuantityCart(item.product)">
+            <ion-icon name="remove"></ion-icon>
+          </ion-fab-button>
+          <p>{{ item.quantity }}</p>
+          <ion-fab-button (click)="increaseQuantityCart(item.product)">
+            <ion-icon name="add"></ion-icon>
+          </ion-fab-button>
+        </div>
       </ion-label>
+      <ion-button
+        (click)="removeItem(item.product)"
+        class="trash"
+        fill="clear"
+        style="margin-left: auto"
+      >
+        <ion-icon slot="icon-only" name="trash" style="color: red"></ion-icon>
+      </ion-button>
     </div>
   </ion-item>
+  <ion-item *ngIf="totalQuantityCart() > 0">
+    <ion-label>Total</ion-label>
+    <ion-label slot="end"
+      >R$ {{ totalQuantityCart() | number: "1.2-2" }}</ion-label
+    >
+  </ion-item>
+  <ion-item *ngIf="totalQuantityCart() == 0">
+    <ion-label>Seu carrinho esta vazio</ion-label>
+  </ion-item>
+
+  <ion-button
+    expand="block"
+    color="primary"
+    fill="outline"
+    style="margin-top: 1rem"
+    [routerLink]="['/categories']"
+    >Continuar comprando</ion-button
+  >
 </ion-content>

@@ -32,4 +32,52 @@ export class CartsService {
     this.storageService.setCart(cart);
     return cart;
   }
+
+  removeProductCart(product: ProductDTO): Cart {
+    let cart = this.getCart();
+    let position = cart.itemsCarts.findIndex(
+      (cart) => cart.product.id === product.id
+    );
+    if (position !== -1) {
+      cart.itemsCarts.splice(position, 1);
+    }
+    this.storageService.setCart(cart);
+    return cart;
+  }
+
+  increaseQuantityProductCart(product: ProductDTO): Cart {
+    let cart = this.getCart();
+    let position = cart.itemsCarts.findIndex(
+      (cart) => cart.product.id === product.id
+    );
+    if (position !== -1) {
+      cart.itemsCarts[position].quantity++;
+    }
+    this.storageService.setCart(cart);
+    return cart;
+  }
+
+  decreaseQuantityProductCart(product: ProductDTO): Cart {
+    let cart = this.getCart();
+    let position = cart.itemsCarts.findIndex(
+      (cart) => cart.product.id === product.id
+    );
+    if (position !== -1) {
+      cart.itemsCarts[position].quantity--;
+      if (cart.itemsCarts[position].quantity === 0) {
+        cart = this.removeProductCart(product);
+      }
+    }
+    this.storageService.setCart(cart);
+    return cart;
+  }
+
+  totalProductCart(): number {
+    let cart = this.getCart();
+    let sum = 0;
+    for (var i = 0; i < cart.itemsCarts.length; i++) {
+      sum += cart.itemsCarts[i].product.price * cart.itemsCarts[i].quantity;
+    }
+    return sum;
+  }
 }
