@@ -10,7 +10,11 @@
 <ion-content class="page-addressPick">
   <h5>Selecione o Endereço</h5>
   <ion-list>
-    <ion-item button *ngFor="let address of addresses">
+    <ion-item
+      button
+      *ngFor="let address of addresses"
+      (click)="nextPage(address)"
+    >
       <ion-label>
         <h2>{{ address.neighborhood }}, {{ address.number }}</h2>
         <h3>
