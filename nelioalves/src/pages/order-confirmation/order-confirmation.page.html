@@ -1,7 +1,7 @@
 <ion-header translucent>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/categories"></ion-back-button>
+      <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title>Confirmação de Pedido</ion-title>
   </ion-toolbar>
@@ -62,4 +62,16 @@
       <h1>Pagamento com Boleto</h1>
     </ion-label>
   </ion-item>
+
+  <ion-button (click)="checkout()" expand="block" color="primary"
+    >Confirmar pedido</ion-button
+  >
+  <ion-button
+    (click)="goBack()"
+    style="margin-top: 2rem"
+    expand="block"
+    color="primary"
+    fill="outline"
+    >Voltar</ion-button
+  >
 </ion-content>

@@ -1,3 +1,4 @@
+import { PurchasesService } from './../../services/domain/purchases.service';
 import { AddressDTO } from './../../models/address.dto';
 import { ClientsService } from 'src/services/domain/clients.service';
 import { ClientDTO } from './../../models/client.dto';
@@ -6,6 +7,7 @@ import { CartsService } from 'src/services/domain/carts.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PurchaseDTO } from 'src/models/purchase.dto';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-order-confirmation',
@@ -22,7 +24,9 @@ export class OrderConfirmationPage implements OnInit {
     private activatedRoute: ActivatedRoute,
     private cartsService: CartsService,
     private clientsService: ClientsService,
-    private router: Router
+    private purchasesService: PurchasesService,
+    private router: Router,
+    private location: Location
   ) {}
 
   private findAddress(addresses: AddressDTO[], id: string): AddressDTO {
@@ -31,6 +35,22 @@ export class OrderConfirmationPage implements OnInit {
 
   total() {
     return this.cartsService.totalProductCart();
+  }
+
+  checkout() {
+    this.purchasesService.insert(this.purchase).subscribe(
+      (response) => {
+        this.cartsService.createOrClearCart();
+        alert(response.headers.get('location'));
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  goBack() {
+    this.router.navigate(['/cart']);
   }
 
   ngOnInit() {

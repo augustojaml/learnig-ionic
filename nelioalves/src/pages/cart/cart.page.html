@@ -55,6 +55,7 @@
     >Continuar comprando</ion-button
   >
   <ion-button
+    *ngIf="cartItem.length > 0"
     style="margin-top: 1rem"
     (click)="checkout()"
     expand="block"

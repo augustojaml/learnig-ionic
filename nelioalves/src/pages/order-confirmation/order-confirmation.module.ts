@@ -1,3 +1,4 @@
+import { PurchasesService } from './../../services/domain/purchases.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -13,8 +14,9 @@ import { OrderConfirmationPage } from './order-confirmation.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    OrderConfirmationPageRoutingModule
+    OrderConfirmationPageRoutingModule,
   ],
-  declarations: [OrderConfirmationPage]
+  declarations: [OrderConfirmationPage],
+  providers: [PurchasesService],
 })
 export class OrderConfirmationPageModule {}
