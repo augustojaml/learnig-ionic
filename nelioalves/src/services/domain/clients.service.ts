@@ -1,3 +1,4 @@
+import { ImageUtilService } from './../Image-util-service';
 import { API_CONFIG } from './../../config/api.config';
 import { ClientDTO } from './../../models/client.dto';
 import { Observable } from 'rxjs';
@@ -9,7 +10,8 @@ import { StorageService } from '../storage.service';
 export class ClientsService {
   constructor(
     public httpClient: HttpClient,
-    public storageService: StorageService
+    public storageService: StorageService,
+    private imageUtilService: ImageUtilService
   ) {}
 
   findByEmail(email: string): Observable<any> {
@@ -32,5 +34,19 @@ export class ClientsService {
       observe: 'response',
       responseType: 'text',
     });
+  }
+
+  uploadPicture(picture: any) {
+    const pictureBlob = this.imageUtilService.dataUriToBlob(picture);
+    const formData: FormData = new FormData();
+    formData.set('file', pictureBlob, 'file.png');
+    return this.httpClient.post(
+      `${API_CONFIG.baseUrl}/clients/picture`,
+      formData,
+      {
+        observe: 'response',
+        responseType: 'text',
+      }
+    );
   }
 }

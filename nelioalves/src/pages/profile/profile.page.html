@@ -24,7 +24,7 @@
           >Image de perfile</ion-card-title
         >
       </ion-card-header>
-      <ion-card-content>
+      <ion-card-content style="display: flex; flex-direction: column">
         <ion-button
           (click)="getPicture()"
           expand="block"
@@ -32,6 +32,21 @@
           fill="outline"
           [disabled]="cameraON"
           >Photo</ion-button
+        >
+        <ion-button
+          *ngIf="picture"
+          (click)="sendPicture()"
+          expand="block"
+          color="secondary"
+          >Enviar Photo</ion-button
+        >
+        <ion-button
+          *ngIf="picture"
+          (click)="cancel()"
+          expand="block"
+          color="secondary"
+          fill="outline"
+          >Descartar Image</ion-button
         >
       </ion-card-content>
     </ion-card>

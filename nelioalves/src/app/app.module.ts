@@ -16,6 +16,7 @@ import { HttpAuthInterceptorProvider } from 'src/interceptors/http-auth-intercep
 
 import { AuthService } from 'src/services/auth.service';
 import { ClientsService } from 'src/services/domain/clients.service';
+import { ImageUtilService } from 'src/services/Image-util-service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -36,6 +37,7 @@ import { ClientsService } from 'src/services/domain/clients.service';
     ClientsService,
     ProductsService,
     CartsService,
+    ImageUtilService,
   ],
   bootstrap: [AppComponent],
 })
