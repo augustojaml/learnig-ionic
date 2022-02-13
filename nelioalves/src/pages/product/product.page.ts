@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ProductDTO } from '../../models/product.dto';
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from 'src/services/domain/products.service';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-product',
@@ -11,24 +12,36 @@ import { ProductsService } from 'src/services/domain/products.service';
 })
 export class ProductPage implements OnInit {
   products: ProductDTO[] = [];
+  isLoading = true;
 
   categoriesId: string = '';
 
   constructor(
     private activeRoute: ActivatedRoute,
     private productsService: ProductsService,
-    private router: Router
+    private router: Router,
+    private loadingController: LoadingController
   ) {}
 
   getCategoryId() {
+    const loading = this.presentLoading();
     this.productsService
       .findByCategories(this.activeRoute.snapshot.params.id)
       .subscribe(
         ({ content }: any) => {
           this.products = content;
           this.loadingImageUrl();
+          loading.then((load) => {
+            load.dismiss();
+            this.isLoading = false;
+          });
         },
-        (error) => {}
+        (error) => {
+          loading.then((load) => {
+            load.dismiss();
+            this.isLoading = false;
+          });
+        }
       );
   }
 
@@ -46,6 +59,15 @@ export class ProductPage implements OnInit {
 
   handleProductDetail(product: ProductDTO) {
     this.router.navigate(['/product-detail', { id: product.id }]);
+  }
+
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'Aguarde...',
+    });
+    await loading.present();
+    return loading;
   }
 
   ngOnInit() {

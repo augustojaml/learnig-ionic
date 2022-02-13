@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content class="page-product">
-  <ion-list>
+  <ion-list *ngIf="!isLoading">
     <ion-item
       *ngFor="let product of products"
       (click)="handleProductDetail(product)"
