@@ -5,6 +5,7 @@ import { StorageService } from 'src/services/storage.service';
 import { ClientsService } from 'src/services/domain/clients.service';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
 
 @Component({
   selector: 'app-profile',
@@ -13,11 +14,14 @@ import { Router } from '@angular/router';
 })
 export class ProfilePage implements OnInit {
   client: ClientDTO;
+  picture: string;
+  cameraON: boolean = false;
 
   constructor(
     private storageService: StorageService,
     private clientsService: ClientsService,
-    private route: Router
+    private route: Router,
+    private camera: Camera
   ) {}
 
   getImageBucketUrl() {
@@ -26,6 +30,27 @@ export class ProfilePage implements OnInit {
         this.client.imageUrl = `${API_CONFIG.bucketBaseUrl}/cp${this.client.id}.jpg`;
       },
       (error) => {}
+    );
+  }
+
+  getPicture() {
+    this.cameraON = true;
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.FILE_URI,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+    };
+
+    this.camera.getPicture(options).then(
+      (imageData) => {
+        this.picture = 'data:image/png;base64,' + imageData;
+        console.log(this.picture);
+        this.cameraON = false;
+      },
+      (err) => {
+        // Handle error
+      }
     );
   }
 

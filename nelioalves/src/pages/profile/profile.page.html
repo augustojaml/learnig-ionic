@@ -17,5 +17,23 @@
     </ion-avatar>
     <h2>{{ client?.name}}</h2>
     <h2>{{ client?.email}}</h2>
+    <ion-card style="width: 100%; margin-left: 0">
+      <img style="width: 100% !important" *ngIf="picture" [src]="picture" />
+      <ion-card-header>
+        <ion-card-title style="text-align: center"
+          >Image de perfile</ion-card-title
+        >
+      </ion-card-header>
+      <ion-card-content>
+        <ion-button
+          (click)="getPicture()"
+          expand="block"
+          color="primary"
+          fill="outline"
+          [disabled]="cameraON"
+          >Photo</ion-button
+        >
+      </ion-card-content>
+    </ion-card>
   </ion-row>
 </ion-content>
