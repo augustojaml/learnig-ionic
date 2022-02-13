@@ -1,9 +1,9 @@
 import { API_CONFIG } from 'src/config/api.config';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductDTO } from '../../models/product.dto';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ProductsService } from 'src/services/domain/products.service';
-import { LoadingController } from '@ionic/angular';
+import { IonInfiniteScroll, LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-product',
@@ -16,6 +16,10 @@ export class ProductPage implements OnInit {
 
   categoriesId: string = '';
 
+  page: number = 0;
+
+  @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
+
   constructor(
     private activeRoute: ActivatedRoute,
     private productsService: ProductsService,
@@ -26,15 +30,17 @@ export class ProductPage implements OnInit {
   getCategoryId() {
     const loading = this.presentLoading();
     this.productsService
-      .findByCategories(this.activeRoute.snapshot.params.id)
+      .findByCategories(this.activeRoute.snapshot.params.id, this.page, 12)
       .subscribe(
         ({ content }: any) => {
-          this.products = content;
-          this.loadingImageUrl();
+          let start = this.products.length;
+          this.products = this.products.concat(content);
+          let end = this.products.length - 1;
           loading.then((load) => {
             load.dismiss();
             this.isLoading = false;
           });
+          this.loadingImageUrl(start, end);
         },
         (error) => {
           loading.then((load) => {
@@ -45,8 +51,8 @@ export class ProductPage implements OnInit {
       );
   }
 
-  loadingImageUrl() {
-    for (let i = 0; i < this.products.length; i++) {
+  loadingImageUrl(start: number, end: number) {
+    for (let i = start; i <= end; i++) {
       let product = this.products[i];
       this.productsService.getSmallImageFromBucket(product.id).subscribe(
         (response) => {
@@ -71,10 +77,22 @@ export class ProductPage implements OnInit {
   }
 
   doRefresh(event: any) {
-    this.getCategoryId();
+    this.infiniteScroll.disabled = false;
+    this.page = 0;
+    this.products = [];
     setTimeout(() => {
+      this.getCategoryId();
       event.target.complete();
     }, 1000);
+  }
+
+  loadData(event: any) {
+    event.target.disabled = false;
+    this.page++;
+    this.getCategoryId();
+    setTimeout(() => {
+      this.infiniteScroll.disabled = true;
+    }, 2000);
   }
 
   ngOnInit() {
