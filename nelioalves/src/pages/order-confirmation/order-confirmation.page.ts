@@ -19,6 +19,7 @@ export class OrderConfirmationPage implements OnInit {
   cartItem: CartItem[];
   client: ClientDTO;
   address: AddressDTO;
+  purchaseId: string;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -41,7 +42,7 @@ export class OrderConfirmationPage implements OnInit {
     this.purchasesService.insert(this.purchase).subscribe(
       (response) => {
         this.cartsService.createOrClearCart();
-        alert(response.headers.get('location'));
+        this.purchaseId = this.extractId(response.headers.get('location'));
       },
       (error) => {
         console.log(error);
@@ -51,6 +52,11 @@ export class OrderConfirmationPage implements OnInit {
 
   goBack() {
     this.router.navigate(['/cart']);
+  }
+
+  private extractId(location: string): string {
+    const position = location.lastIndexOf('/');
+    return location.substring(position + 1, location.length);
   }
 
   ngOnInit() {
