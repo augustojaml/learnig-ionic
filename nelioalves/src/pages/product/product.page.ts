@@ -70,6 +70,13 @@ export class ProductPage implements OnInit {
     return loading;
   }
 
+  doRefresh(event: any) {
+    this.getCategoryId();
+    setTimeout(() => {
+      event.target.complete();
+    }, 1000);
+  }
+
   ngOnInit() {
     this.getCategoryId();
   }
