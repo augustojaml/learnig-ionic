@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const API_CONFIG = {
-  baseUrl: 'http://localhost:8080',
+  baseUrl: 'https://augustojaml-bckend-spring.herokuapp.com',
   bucketBaseUrl: 'https://jaml-mcspring-backeng.s3.sa-east-1.amazonaws.com',
 };
 

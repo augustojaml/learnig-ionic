@@ -1,7 +1,8 @@
 {
   "name": "nelioalves",
   "integrations": {
-    "cordova": {}
+    "cordova": {},
+    "capacitor": {}
   },
   "type": "angular"
 }
